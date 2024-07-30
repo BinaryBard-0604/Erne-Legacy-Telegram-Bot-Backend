@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "node ./dist/bot.js",
+    "start": "node /bot.ts",
     "test": "node ./dist/twitter.js"
   },
   "keywords": [],
