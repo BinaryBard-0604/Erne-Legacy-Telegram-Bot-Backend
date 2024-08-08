@@ -1,11 +1,11 @@
 {
-  "name": "Mike-Token-Game-Bot",
+  "name": "Game-Bot",
   "version": "1.0.0",
   "description": "Please enjoy the bot!",
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "node /bot.ts",
+    "start": "node ./dist/bot.js",
     "test": "node ./dist/twitter.js"
   },
   "keywords": [],

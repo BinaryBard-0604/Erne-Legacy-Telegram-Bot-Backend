@@ -35,6 +35,12 @@ let USER_ID: number = 0;
 let USER_NAME: string = "Leo_mint";
 let chatId: number = 0;
 
+const BotMenu = [
+  { command: "start", description: "Welcome" },
+  { command: "help", description: "Help" },
+  { command: "setting", description: "Setting" }
+];
+
 // Define the inline keyboard layout for interaction
 const options = {
   reply_markup: {
@@ -42,12 +48,16 @@ const options = {
       [
         {
           text: "Play in 1 click  🐉",
-          web_app: { url: "https://mike-coin-bot-1.vercel.app/" },
-        },
-      ],
-    ],
-  },
+          web_app: {
+            url: "https://erne-legacy-telegram-app-frontend.vercel.app/"
+          }
+        }
+      ]
+    ]
+  }
 };
+
+bot.setMyCommands(BotMenu);
 
 // Handle the /start command
 bot.onText(/\/start/, (msg: any) => {
@@ -57,12 +67,60 @@ bot.onText(/\/start/, (msg: any) => {
 
   console.log("--//---myChatID----//---", chatId);
 
-  const welcomeMessage =
-    "Hello! Welcome to the Erne Legacy Bot!";
+  const welcomeMessage = "Hello! Welcome to the Erne Legacy Bot!";
 
   // Send the welcome message with the inline keyboard
   bot.sendMessage(chatId, welcomeMessage, options);
-});;
+});
+
+bot.onText(/\/help/, (msg: any) => {
+  chatId = msg.chat.id;
+  const userID = msg.from.id;
+  // USER_ID = chatId;
+
+  console.log("--//---myChatID----//---", chatId);
+
+  const welcomeMessage = "Hello! Welcome to the Erne Legacy Bot!";
+
+  // Send the welcome message with the inline keyboard
+  bot.sendMessage(chatId, welcomeMessage);
+});
+
+bot.onText(/\/setting/, (msg: any) => {
+  chatId = msg.chat.id;
+  const userID = msg.from.id;
+  // USER_ID = chatId;
+
+  console.log("--//---myChatID----//---", chatId);
+
+  const welcomeMessage = "Hello! Welcome to the Erne Legacy Bot!";
+
+  // Send the welcome message with the inline keyboard
+  bot.sendMessage(chatId, welcomeMessage);
+});
+
+bot.on("message", async (msg: any) => {
+  chatId = msg.chat.id;
+  USER_ID = chatId;
+  const userID = msg.from.id;
+  USER_NAME = msg.from?.username;
+
+  console.log("--//---myChatID----//---", chatId);
+  console.log(
+    "--//---myUserID----//---",
+    userID,
+    msg.from.id,
+    userID,
+    msg.from.username
+  );
+
+  // Check if the message is from the specific group and the specific user
+  if (msg.text.includes("/start") && msg.text !== "/start") {
+    const startIndex = msg.text.indexOf(" ") + 1; // Find the index of the space and add 1 to get the start of the substring
+    const subString = msg.text.substring(startIndex);
+    console.log(msg.from.username, subString);
+  }
+});
 
 const app = express();
 app.use(cors());
