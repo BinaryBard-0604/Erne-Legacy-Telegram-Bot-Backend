@@ -2,6 +2,7 @@ import { url } from "inspector";
 import { text } from "stream/consumers";
 import { callback } from "telegraf/typings/button";
 import { Telegraf, Markup } from "telegraf";
+import { subscribe } from "diagnostics_channel";
 
 // Import the necessary packages
 const TelegramBot = require("node-telegram-bot-api");
@@ -118,7 +119,19 @@ bot.on("message", async (msg: any) => {
   if (msg.text.includes("/start") && msg.text !== "/start") {
     const startIndex = msg.text.indexOf(" ") + 1; // Find the index of the space and add 1 to get the start of the substring
     const subString = msg.text.substring(startIndex);
-    console.log(msg.from.username, subString);
+    try {
+      await axios.post(
+        `https://erne-legacy-telegram-app-backend.onrender.com/api/friend/add`,
+        {
+          username: subString,
+          friend: msg.from.username
+        }
+      );
+
+      console.log("--//---OK!!!--add friend--//---", subString, msg.from.username);
+    } catch (error) {
+      console.error(error);
+    }
   }
 });
 
