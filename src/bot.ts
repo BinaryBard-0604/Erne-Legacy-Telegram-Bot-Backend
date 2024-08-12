@@ -18,7 +18,7 @@ const cors = require("cors");
 dotenv.config();
 
 const token = process.env.TELEGRAM_TOKEN;
-console.log("Bot token:", token); // Confirm token is loaded
+console.log("Bot token:", token, {polling: true}); // Confirm token is loaded
 
 // Create a new Telegram bot using polling to fetch new updates
 const bot = new TelegramBot(token, { polling: true });
