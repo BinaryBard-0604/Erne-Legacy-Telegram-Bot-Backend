@@ -50,7 +50,7 @@ const options = {
         {
           text: "Play in 1 click  🐉",
           web_app: {
-            url: "https://erne-legacy-telegram-app-frontend.vercel.app/"
+            url: "http://localhost:5000"
           }
         }
       ]
