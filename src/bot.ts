@@ -22,8 +22,12 @@ console.log("Bot token:", token); // Confirm token is loaded
 
 // Create a new Telegram bot using polling to fetch new updates
 // const bot = new TelegramBot(token, { polling: true });
-const bot = new TelegramBot(token);
-bot.setWebHook("http://localhost:3000/" + bot.token);
+const bot = new TelegramBot(token, { polling: true, request: {
+    agentOptions: {
+        keepAlive: true,
+        family: 4
+    }
+}});
 
 // Assign telegram channel id
 const groupUsername = process.env.GROUP_USERNAME;
@@ -52,7 +56,7 @@ const options = {
         {
           text: "Play in 1 click  🐉",
           web_app: {
-            url: "http://localhost:5000/"
+            url: "https://erne-legacy-telegram-app-frontend.vercel.app/"
           }
         }
       ]
