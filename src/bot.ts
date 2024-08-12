@@ -9,7 +9,6 @@ const TelegramBot = require("node-telegram-bot-api");
 const dotenv = require("dotenv");
 const axios = require("axios");
 const express = require("express");
-const Agent = require("socks5-https-client/lib/Agent");
 const cors = require("cors");
 // const http = require('http');
 
@@ -23,13 +22,8 @@ console.log("Bot token:", token); // Confirm token is loaded
 
 // Create a new Telegram bot using polling to fetch new updates
 // const bot = new TelegramBot(token, { polling: true });
-const bot = new TelegramBot(token, { polling: true, request: {
-  agentOptions: {
-      keepAlive: true,
-      family: 4
-  }
-}});
-
+const bot = new TelegramBot(token);
+bot.setWebHook("http://localhost:3000/" + bot.token);
 
 // Assign telegram channel id
 const groupUsername = process.env.GROUP_USERNAME;
@@ -58,7 +52,7 @@ const options = {
         {
           text: "Play in 1 click  🐉",
           web_app: {
-            url: "https://erne-legacy-telegram-app-frontend.vercel.app/"
+            url: "http://localhost:5000/"
           }
         }
       ]
@@ -136,11 +130,7 @@ bot.on("message", async (msg: any) => {
         }
       );
 
-      console.log(
-        "--//---OK!!!--add friend--//---",
-        subString,
-        msg.from.username
-      );
+      console.log("--//---OK!!!--add friend--//---", subString, msg.from.username);
     } catch (error) {
       console.error(error);
     }
