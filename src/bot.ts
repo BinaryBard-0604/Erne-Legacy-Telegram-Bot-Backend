@@ -127,7 +127,7 @@ bot.on("message", async (msg: any) => {
     const subString = msg.text.substring(startIndex);
     try {
       await axios.post(
-        `https://erne-legacy-telegram-app-backend.onrender.com/api/friend/add`,
+        `https://erne.depay.io/api/friend/add`,
         {
           username: subString,
           friend: msg.from.username
